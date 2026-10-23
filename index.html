@@ -19,152 +19,283 @@ header {
 background: #527765;
 color: white;
 text-align: center;
-padding: 45px 20px;
+padding: 32px 16px;
 }
-header h1 { font-size: 38px; margin: 0; }
-header p { margin-bottom: 0; }
-main {
-max-width: 480px;
-margin: auto;
-padding: 22px;
-}
+header h1 { margin: 0; font-size: 36px; }
+header p { margin: 8px 0 0; font-size: 14px; }
+main { max-width: 520px; margin: auto; padding: 20px; }
 .card {
 background: white;
-padding: 24px;
 border-radius: 20px;
-margin-bottom: 18px;
+padding: 22px;
+margin-bottom: 16px;
+
 box-shadow: 0 3px 12px #294c4010;
 }
-h2 { margin-top: 0; font-size: 22px; }
+h2 { margin-top: 0; }
 button {
 background: #527765;
 color: white;
-border: none;
+border: 0;
 border-radius: 12px;
-padding: 14px 18px;
-font-size: 16px;
+padding: 13px 16px;
+font: inherit;
 cursor: pointer;
-margin: 5px 5px 5px 0;
+margin: 4px 3px 4px 0;
 }
-button:focus-visible {
-outline: 3px solid #9cc7b2;
+button.secondary {
+background: #e3ede5;
+color: #304b3e;
 }
+button:focus-visible, textarea:focus-visible {
+outline: 3px solid #92bca6;
+}
+nav {
+display: flex;
+justify-content: center;
+gap: 8px;
+background: white;
+padding: 12px;
+}
+nav button { flex: 1; max-width: 180px; }
 textarea {
 width: 100%;
-min-height: 110px;
+min-height: 100px;
+
 border: 1px solid #b9cbbd;
 border-radius: 12px;
 padding: 12px;
 font: inherit;
-resize: vertical;
 }
-.message {
-background: #edf2ec;
-padding: 15px;
-border-radius: 12px;
-margin-top: 15px;
+.screen { display: none; }
+.screen.active { display: block; }
+.chat {
+min-height: 180px;
+max-height: 380px;
+overflow-y: auto;
+background: #f4f7f2;
+border-radius: 15px;
+padding: 12px;
+margin-bottom: 15px;
+}
+.bubble {
+background: #dcece0;
+padding: 12px;
+border-radius: 15px;
+margin: 10px 0 10px auto;
+max-width: 85%;
 white-space: pre-wrap;
+overflow-wrap: anywhere;
 }
-.warning { color: #9b4437; }
-footer {
-text-align: center;
-padding: 25px;
-color: #62796a;
-font-size: 13px;
+.notice {
+background: #edf2ec;
+border-radius: 12px;
+padding: 14px;
+margin-top: 12px;
 }
+.warning { background: #fff0e9; color: #833f30; }
+.small { font-size: 13px; color: #607667; }
+footer { text-align: center; padding: 20px; }
+
 </style>
 </head>
 <body>
+
 <header>
 <h1>SafeSpace</h1>
 <p>Speak freely. Listen kindly. Grow together.</p>
 </header>
 
+<nav aria-label="Main navigation">
+<button onclick="showScreen('home')">Home</button>
+<button onclick="showScreen('conversations')">
+Conversations
+</button>
+</nav>
+
 <main>
-<section class="card">
-<h2>Welcome to your SafeSpace</h2>
+<section id="home" class="screen active">
+<div class="card">
+<h2>Welcome to SafeSpace</h2>
+
 <p>A place to feel heard, communicate
 respectfully, and grow together.</p>
-</section>
+<button onclick="showScreen('conversations')">
+Start a Conversation
+</button>
+</div>
 
-<section class="card">
+<div class="card">
+
 <h2>How are you feeling today?</h2>
 <button onclick="feeling('Happy')">😊 Happy</button>
 <button onclick="feeling('Hurt')">💔 Hurt</button>
-<button onclick="feeling('Frustrated')">😔 Frustrated</button>
-<button onclick="feeling('Hopeful')">🌿 Hopeful</button>
-<p id="feelingResult" aria-live="polite"></p>
-</section>
-
-<section class="card">
-<h2>Start a Conversation</h2>
-<p>Share what's on your mind.</p>
-<textarea id="message"
-placeholder="I feel..."></textarea>
-<button onclick="reviewMessage()">
-Review Before Sending
+<button onclick="feeling('Frustrated')">
+😔 Frustrated
 </button>
-<div id="result" aria-live="polite"></div>
-</section>
+<button onclick="feeling('Hopeful')">
+🌿 Hopeful
+</button>
+<p id="feelingResult" aria-live="polite"></p>
+</div>
 
-<section class="card">
+<div class="card">
+
 <h2>Our SafeSpace Promise</h2>
 <p>✓ Respect every voice</p>
 <p>✓ Listen without judgment</p>
 <p>✓ Express feelings honestly</p>
 <p>✓ Respect personal boundaries</p>
 <p>✓ Choose understanding over insults</p>
+</div>
+</section>
+
+<section id="conversations" class="screen">
+<div class="card">
+<h2>Family Conversation</h2>
+<p class="small">
+Private-style practice screen.
+Messages are not sent or saved.
+</p>
+
+<div id="chat" class="chat" role="log"
+aria-label="Practice messages">
+<p class="small">
+Start by sharing what's on your mind.
+</p>
+</div>
+
+<label for="message">Your message</label>
+
+<textarea id="message"
+placeholder="I feel..."></textarea>
+
+<button onclick="reviewMessage()">
+Review Before Sending
+</button>
+
+<div id="review" aria-live="polite"></div>
+</div>
 </section>
 </main>
 
-<footer>
+<footer class="small">
+
 SafeSpace • A kinder way to communicate
-<p>Prototype only. No messages are delivered or saved.</p>
+<p>Prototype only. Use fictional messages.</p>
 </footer>
 
 <script>
+function showScreen(id) {
+document.querySelectorAll(".screen").forEach(s => {
+s.classList.toggle("active", s.id === id);
+});
+
+}
+
 function feeling(value) {
 document.getElementById("feelingResult")
 .textContent = "You're feeling " + value +
 ". Thank you for sharing.";
 }
 
-function reviewMessage() {
-const message = document.getElementById("message")
-.value.trim();
-const result = document.getElementById("result");
-result.replaceChildren();
+let approvedMessage = "";
 
-if (!message) {
-result.textContent = "Please write a message first.";
-return;
+function clearReview() {
+approvedMessage = "";
+document.getElementById("review").replaceChildren();
 }
 
-const warning = document.createElement("div");
-warning.className = "message";
+document.getElementById("message")
+.addEventListener("input", clearReview);
+
+function addNotice(text, warning = false) {
+const box = document.createElement("div");
+box.className = warning ? "notice warning" : "notice";
+box.textContent = text;
+document.getElementById("review").appendChild(box);
+}
+
+function addButton(label, action, secondary = false) {
+const button = document.createElement("button");
+button.textContent = label;
+if (secondary) button.className = "secondary";
+button.addEventListener("click", action);
+document.getElementById("review").appendChild(button);
+}
+
+function reviewMessage() {
+clearReview();
+
+
+const message = document.getElementById("message")
+.value.trim();
+
+if (!message) {
+addNotice("Please write a message first.");
+return;
+
+}
 
 const threatPattern =
 /\b(kill you|hurt you|beat you up|i will find you)\b/i;
 
 if (threatPattern.test(message)) {
-warning.classList.add("warning");
-warning.textContent =
-"Message paused. Please revise potentially " +
-"threatening language.";
-} else if (
-/\b(you always|you never|idiot|stupid)\b/i.test(message)
-) {
-warning.textContent =
-"Consider using an 'I feel...' statement. " +
-"Explain what happened and what you need " +
-"without attacking the other person.";
-} else {
-warning.textContent =
-"Your message is ready for your review. " +
-"Thank you for communicating thoughtfully.";
+addNotice(
+"Message paused. This wording may contain a threat. " +
+"Please revise your message.",
+true
+);
+return;
 }
 
-result.appendChild(warning);
+approvedMessage = message;
+
+const harshPattern =
+/\b(you always|you never|idiot|stupid|hate you)\b/i;
+
+if (harshPattern.test(message)) {
+addNotice(
+"Consider explaining how you feel without " +
+"making a personal accusation."
+);
+
+addButton("Try a gentler version", () => {
+document.getElementById("message").value =
+"I feel upset about what happened. " +
+"I'd like us to talk about it and find " +
+"a way forward together.";
+clearReview();
+}, true);
+
+addButton("Keep my original message", () => {
+sendMessage(approvedMessage);
+});
+} else {
+addNotice(
+"Your message is ready for your final review."
+);
+addButton("Send Practice Message", () => {
+sendMessage(approvedMessage);
+});
+}
+}
+
+function sendMessage(message) {
+if (!message) return;
+
+const bubble = document.createElement("div");
+bubble.className = "bubble";
+bubble.textContent = message;
+
+document.getElementById("chat").appendChild(bubble);
+document.getElementById("message").value = "";
+clearReview();
+
+bubble.scrollIntoView({
+behavior: "smooth",
+block: "nearest"
+});
 }
 </script>
 </body>
