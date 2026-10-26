@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#527765">
 <title>SafeSpace</title>
-
 <style>
 * { box-sizing: border-box; }
 
@@ -14,66 +13,29 @@ body {
   margin: 0;
   background: #edf2ec;
   color: #304b3e;
-  font-family: -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
 header {
   background: #527765;
   color: white;
   text-align: center;
-  padding: 32px 16px;
+  padding: 30px 16px;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 36px;
-}
-
-header p {
-  margin: 8px 0 0;
-  font-size: 14px;
-}
+header h1 { margin: 0; font-size: 36px; }
+header p { margin: 8px 0 0; font-size: 14px; }
 
 nav {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 8px;
   background: white;
   padding: 12px;
 }
 
-button {
-  background: #527765;
-  color: white;
-  border: 0;
-  border-radius: 12px;
-  padding: 13px 16px;
-  font: inherit;
-  cursor: pointer;
-  margin: 4px 3px 4px 0;
-}
-
-button.secondary {
-  background: #e3ede5;
-  color: #304b3e;
-}
-
-button.danger {
-  background: #a34c48;
-}
-
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid #92bca6;
-  outline-offset: 2px;
-}
-
 main {
-  max-width: 600px;
+  max-width: 650px;
   margin: auto;
   padding: 20px;
 }
@@ -88,22 +50,39 @@ main {
 
 h2 { margin-top: 0; }
 
-.small {
-  font-size: 13px;
-  color: #607667;
+button {
+  background: #527765;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin: 4px 3px 4px 0;
+  font: inherit;
+  cursor: pointer;
 }
 
-.screen { display: none; }
-.screen.active { display: block; }
+button.secondary {
+  background: #e3ede5;
+  color: #304b3e;
+}
+
+button.danger { background: #a34c48; }
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #92bca6;
+  outline-offset: 2px;
+}
 
 input, select, textarea {
   width: 100%;
+  padding: 12px;
+  margin: 8px 0 15px;
   border: 1px solid #b9cbbd;
   border-radius: 12px;
-  padding: 12px;
   font: inherit;
-  margin: 8px 0 15px;
-  background: white;
 }
 
 textarea {
@@ -116,36 +95,64 @@ label {
   font-weight: 600;
 }
 
+.small {
+  font-size: 13px;
+  color: #607667;
+}
+
+.screen { display: none; }
+.screen.active { display: block; }
+
 .space-card {
-  border: 1px solid #d4e2d7;
   background: #f7faf6;
+  border: 1px solid #d4e2d7;
   border-radius: 15px;
   padding: 16px;
   margin: 12px 0;
 }
 
-.space-card h3 {
-  margin: 0 0 6px;
-}
+.space-card h3 { margin: 0 0 6px; }
 
 .chat {
-  min-height: 180px;
-  max-height: 380px;
+  min-height: 220px;
+  max-height: 420px;
   overflow-y: auto;
   background: #f4f7f2;
-  border-radius: 15px;
-  padding: 12px;
-  margin-bottom: 15px;
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 16px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 12px 0;
 }
 
 .bubble {
   background: #dcece0;
-  padding: 12px;
-  border-radius: 15px;
-  margin: 10px 0 10px auto;
+  border-radius: 16px 16px 4px 16px;
+  padding: 12px 15px;
   max-width: 85%;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+.message-info {
+  font-size: 11px;
+  color: #607667;
+  margin: 5px 3px;
+}
+
+.topic {
+  display: inline-block;
+  background: #e3ede5;
+  color: #304b3e;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin-bottom: 7px;
 }
 
 .notice {
@@ -164,6 +171,7 @@ footer {
   text-align: center;
   padding: 20px;
 }
+
 </style>
 </head>
 
@@ -174,7 +182,7 @@ footer {
   <p>Speak freely. Listen kindly. Grow together.</p>
 </header>
 
-<nav aria-label="Main navigation">
+<nav>
   <button onclick="showScreen('home')">Home</button>
   <button onclick="showScreen('spaces')">My SafeSpaces</button>
 </nav>
@@ -182,7 +190,6 @@ footer {
 <main>
 
 <section id="home" class="screen active">
-
   <div class="card">
     <h2>Welcome to SafeSpace</h2>
     <p>
@@ -196,7 +203,6 @@ footer {
 
   <div class="card">
     <h2>How are you feeling today?</h2>
-
     <button onclick="feeling('Happy')">😊 Happy</button>
     <button onclick="feeling('Hurt')">💔 Hurt</button>
     <button onclick="feeling('Frustrated')">
@@ -205,7 +211,6 @@ footer {
     <button onclick="feeling('Hopeful')">
       🌿 Hopeful
     </button>
-
     <p id="feelingResult" aria-live="polite"></p>
   </div>
 
@@ -217,89 +222,81 @@ footer {
     <p>✓ Respect personal boundaries</p>
     <p>✓ Choose understanding over insults</p>
   </div>
-
 </section>
 
 <section id="spaces" class="screen">
-
   <div class="card">
     <h2>My SafeSpaces</h2>
-    <p>
-      Create separate spaces for the conversations
-      that matter most.
-    </p>
-
+    <p>Create and organize your practice conversations.</p>
     <div id="spacesList"></div>
-
     <button onclick="showScreen('create')">
       + Create a SafeSpace
     </button>
   </div>
-
 </section>
 
 <section id="create" class="screen">
-
   <div class="card">
     <h2>Create a SafeSpace</h2>
-    <p>
-      Give your space a name and choose
-      what kind of conversation it is for.
-    </p>
 
     <label for="spaceName">SafeSpace Name</label>
-    <input
-      id="spaceName"
-      maxlength="60"
-      placeholder="Example: Our Family Space"
-    >
+    <input id="spaceName" maxlength="60"
+      placeholder="Our Family Space">
 
     <label for="spaceType">Space Type</label>
     <select id="spaceType">
-      <option value="Family">Family</option>
-      <option value="Co-Parenting">Co-Parenting</option>
-      <option value="Relationship">Relationship</option>
-      <option value="Therapy">Therapy</option>
-      <option value="Other">Other</option>
+      <option>Family</option>
+      <option>Co-Parenting</option>
+      <option>Relationship</option>
+      <option>Therapy</option>
+      <option>Other</option>
     </select>
 
     <button onclick="createSpace()">
       Create SafeSpace
     </button>
-
     <button class="secondary"
       onclick="showScreen('spaces')">
       Cancel
     </button>
-
-    <p id="createResult" aria-live="polite"></p>
+    <p id="createStatus" role="status"></p>
   </div>
-
 </section>
 
 <section id="conversation" class="screen">
-
   <div class="card">
     <button class="secondary"
       onclick="showScreen('spaces')">
-      ← Back to My SafeSpaces
+      ← Back
     </button>
 
     <h2 id="conversationTitle"></h2>
     <p id="conversationType" class="small"></p>
 
     <p class="small">
-      Local practice conversation only.
-      Messages are not sent to other people.
+      Local practice only. Messages are not sent
+      to anyone. Use fictional information.
     </p>
 
     <div id="chat" class="chat"
-      role="log"
-      aria-label="Practice messages">
-    </div>
+      role="log" aria-label="Practice messages"></div>
 
-    <label for="message">Your message</label>
+    <label for="senderName">Display Name</label>
+    <input id="senderName" maxlength="40"
+      placeholder="Example: Parent A">
 
+    <label for="topic">Conversation Topic</label>
+    <select id="topic">
+      <option>General</option>
+      <option>Parenting</option>
+      <option>Schedules</option>
+      <option>Feelings</option>
+      <option>Boundaries</option>
+      <option>Questions</option>
+      <option>Other</option>
+    </select>
+
+    <label for="message">Your Message</label>
     <textarea id="message"
       placeholder="I feel..."></textarea>
 
@@ -309,7 +306,6 @@ footer {
 
     <div id="review" aria-live="polite"></div>
   </div>
-
 </section>
 
 </main>
@@ -317,39 +313,83 @@ footer {
 <footer class="small">
   SafeSpace • A kinder way to communicate
   <p>
-    Prototype only. Use fictional messages.
-    Browser storage is not secure or private.
+    Prototype only. Browser storage is not
+    secure private messaging.
   </p>
 </footer>
 
 <script>
-const STORAGE_KEY = "safespace_v3";
+"use strict";
+
+const STORAGE_KEY = "safespace-v3-demo";
+const OTHER_V3_KEY = "safespace_v3";
 
 let spaces = [];
-let activeSpaceId = null;
-let approvedMessage = "";
+let activeId = null;
+let approvedMessage = null;
+
+function normalizeMessage(message) {
+  if (typeof message === "string") {
+    return {
+      text: message,
+      sender: "You",
+      topic: "General",
+      time: null
+    };
+  }
+
+  if (!message || typeof message !== "object") {
+    return null;
+  }
+
+  if (typeof message.text !== "string") {
+    return null;
+  }
+
+  return {
+    text: message.text,
+    sender: typeof message.sender === "string"
+      ? message.sender : "You",
+    topic: typeof message.topic === "string"
+      ? message.topic : "General",
+    time: typeof message.time === "string"
+      ? message.time : null
+  };
+}
 
 function loadSpaces() {
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const parsed = saved ? JSON.parse(saved) : [];
+    let raw = localStorage.getItem(STORAGE_KEY);
 
-    spaces = Array.isArray(parsed)
-      ? parsed.filter(space =>
-          space &&
-          typeof space.id === "string" &&
-          typeof space.name === "string" &&
-          typeof space.type === "string" &&
-          Array.isArray(space.messages)
-        )
-      : [];
+    if (raw === null) {
+      raw = localStorage.getItem(OTHER_V3_KEY);
+    }
+
+    const saved = JSON.parse(raw || "[]");
+
+    if (!Array.isArray(saved)) return;
+
+    spaces = saved
+      .filter(s =>
+        s &&
+        typeof s.id === "string" &&
+        typeof s.name === "string" &&
+        Array.isArray(s.messages)
+      )
+      .map(s => ({
+        id: s.id,
+        name: s.name,
+        category: s.category || s.type || "Other",
+        messages: s.messages
+          .map(normalizeMessage)
+          .filter(Boolean)
+      }));
   } catch (error) {
-    spaces = [];
-    alert("Saved spaces could not be loaded.");
+    alert("Saved practice data could not be loaded.");
   }
 }
 
-function saveSpaces() {
+function persist() {
   try {
     localStorage.setItem(
       STORAGE_KEY,
@@ -357,29 +397,21 @@ function saveSpaces() {
     );
     return true;
   } catch (error) {
-    alert(
-      "Your browser could not save this change. " +
-      "Storage may be full or disabled."
-    );
+    alert("Your browser could not save this change.");
     return false;
   }
 }
 
 function showScreen(id) {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.toggle(
-      "active",
-      screen.id === id
-    );
-  });
+  document.querySelectorAll(".screen")
+    .forEach(screen => {
+      screen.classList.toggle(
+        "active",
+        screen.id === id
+      );
+    });
 
-  if (id === "spaces") {
-    renderSpaces();
-  }
-
-  if (id !== "conversation") {
-    clearReview();
-  }
+  if (id === "spaces") renderSpaces();
 }
 
 function feeling(value) {
@@ -389,37 +421,45 @@ function feeling(value) {
     ". Thank you for sharing.";
 }
 
+function makeButton(label, callback, css = "") {
+  const button = document.createElement("button");
+  button.textContent = label;
+  button.className = css;
+  button.type = "button";
+  button.addEventListener("click", callback);
+  return button;
+}
+
 function createSpace() {
   const name = document.getElementById("spaceName")
     .value.trim();
 
-  const type = document.getElementById("spaceType")
+  const category = document.getElementById("spaceType")
     .value;
 
-  const result = document.getElementById("createResult");
-
   if (!name) {
-    result.textContent =
-      "Please give your SafeSpace a name.";
+    document.getElementById("createStatus")
+      .textContent = "Please enter a name.";
     return;
   }
 
-  const newSpace = {
+  const space = {
     id: crypto.randomUUID(),
-    name: name,
-    type: type,
+    name,
+    category,
     messages: []
   };
 
-  spaces.push(newSpace);
+  spaces.push(space);
 
-  if (!saveSpaces()) {
+  if (!persist()) {
     spaces.pop();
     return;
   }
 
   document.getElementById("spaceName").value = "";
-  result.textContent = "";
+  document.getElementById("createStatus")
+    .textContent = "";
 
   showScreen("spaces");
 }
@@ -428,11 +468,11 @@ function renderSpaces() {
   const list = document.getElementById("spacesList");
   list.replaceChildren();
 
-  if (spaces.length === 0) {
+  if (!spaces.length) {
     const empty = document.createElement("p");
     empty.className = "small";
     empty.textContent =
-      "You haven't created a SafeSpace yet.";
+      "No SafeSpaces yet. Create your first one.";
     list.appendChild(empty);
     return;
   }
@@ -444,30 +484,18 @@ function renderSpaces() {
     const title = document.createElement("h3");
     title.textContent = space.name;
 
-    const type = document.createElement("p");
-    type.className = "small";
-    type.textContent =
-      space.type + " • " +
-      space.messages.length + " practice messages";
-
-    const openButton = document.createElement("button");
-    openButton.textContent = "Open SafeSpace";
-    openButton.addEventListener("click", () => {
-      openSpace(space.id);
-    });
-
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "danger";
-    deleteButton.textContent = "Delete";
-    deleteButton.addEventListener("click", () => {
-      deleteSpace(space.id);
-    });
+    const detail = document.createElement("p");
+    detail.className = "small";
+    detail.textContent =
+      space.category + " • " +
+      space.messages.length + " messages";
 
     card.append(
       title,
-      type,
-      openButton,
-      deleteButton
+      detail,
+      makeButton("Open", () => openSpace(space.id)),
+      makeButton("Delete",
+        () => deleteSpace(space.id), "danger")
     );
 
     list.appendChild(card);
@@ -475,190 +503,229 @@ function renderSpaces() {
 }
 
 function deleteSpace(id) {
-  const space = spaces.find(item => item.id === id);
+  const space = spaces.find(s => s.id === id);
   if (!space) return;
 
-  const confirmed = confirm(
+  if (!confirm(
     'Delete "' + space.name +
-    '" and all its practice messages?'
-  );
-
-  if (!confirmed) return;
+    '" and its practice messages?'
+  )) return;
 
   const previous = spaces;
-  spaces = spaces.filter(item => item.id !== id);
+  spaces = spaces.filter(s => s.id !== id);
 
-  if (!saveSpaces()) {
+  if (!persist()) {
     spaces = previous;
     return;
-  }
-
-  if (activeSpaceId === id) {
-    activeSpaceId = null;
   }
 
   renderSpaces();
 }
 
-function getActiveSpace() {
-  return spaces.find(
-    space => space.id === activeSpaceId
-  );
-}
-
 function openSpace(id) {
-  activeSpaceId = id;
-
-  const space = getActiveSpace();
+  const space = spaces.find(s => s.id === id);
   if (!space) return;
+
+  activeId = id;
 
   document.getElementById("conversationTitle")
     .textContent = space.name;
 
   document.getElementById("conversationType")
-    .textContent = space.type + " SafeSpace";
+    .textContent = space.category;
 
   document.getElementById("message").value = "";
-
   clearReview();
-  renderMessages();
+  renderChat();
   showScreen("conversation");
 }
 
-function renderMessages() {
+function renderChat() {
   const chat = document.getElementById("chat");
   chat.replaceChildren();
 
-  const space = getActiveSpace();
+  const space = spaces.find(s => s.id === activeId);
   if (!space) return;
 
-  if (space.messages.length === 0) {
+  if (!space.messages.length) {
     const empty = document.createElement("p");
     empty.className = "small";
     empty.textContent =
-      "Start by sharing what's on your mind.";
+      "Start your practice conversation.";
     chat.appendChild(empty);
-    return;
   }
 
   space.messages.forEach(message => {
+    const item = document.createElement("div");
+    item.className = "message";
+
+    const topic = document.createElement("span");
+    topic.className = "topic";
+    topic.textContent = message.topic;
+
     const bubble = document.createElement("div");
     bubble.className = "bubble";
-    bubble.textContent = message;
-    chat.appendChild(bubble);
+    bubble.textContent = message.text;
+
+    const info = document.createElement("div");
+    info.className = "message-info";
+
+    let dateLabel = "Earlier message";
+
+    if (message.time) {
+      const date = new Date(message.time);
+      if (!Number.isNaN(date.getTime())) {
+        dateLabel = date.toLocaleString();
+      }
+    }
+
+    info.textContent =
+      message.sender + " • " + dateLabel;
+
+    item.append(topic, bubble, info);
+    chat.appendChild(item);
   });
 
   chat.scrollTop = chat.scrollHeight;
 }
 
 function clearReview() {
-  approvedMessage = "";
+  approvedMessage = null;
   document.getElementById("review").replaceChildren();
 }
 
 document.getElementById("message")
   .addEventListener("input", clearReview);
 
-function addNotice(text, warning = false) {
-  const box = document.createElement("div");
-  box.className = warning
-    ? "notice warning"
-    : "notice";
+document.getElementById("senderName")
+  .addEventListener("input", clearReview);
 
-  box.textContent = text;
+document.getElementById("topic")
+  .addEventListener("change", clearReview);
+
+function addNotice(text, warning = false) {
+  const notice = document.createElement("div");
+  notice.className = warning
+    ? "notice warning" : "notice";
+  notice.textContent = text;
 
   document.getElementById("review")
-    .appendChild(box);
+    .appendChild(notice);
 }
 
-function addButton(label, action, secondary = false) {
-  const button = document.createElement("button");
-  button.textContent = label;
-
-  if (secondary) {
-    button.className = "secondary";
-  }
-
-  button.addEventListener("click", action);
-
+function addReviewButton(label, callback, css = "") {
   document.getElementById("review")
-    .appendChild(button);
+    .appendChild(makeButton(label, callback, css));
 }
 
 function reviewMessage() {
   clearReview();
 
-  const message = document.getElementById("message")
+  const text = document.getElementById("message")
     .value.trim();
 
-  if (!message) {
+  const sender = document.getElementById("senderName")
+    .value.trim() || "You";
+
+  const topic = document.getElementById("topic")
+    .value;
+
+  if (!text) {
     addNotice("Please write a message first.");
     return;
   }
 
-  const threatPattern =
+  const threats =
     /\b(kill you|hurt you|beat you up|i will find you)\b/i;
 
-  if (threatPattern.test(message)) {
+  if (threats.test(text)) {
     addNotice(
       "Message paused. This wording may contain " +
-      "a threat. Please revise your message.",
+      "a threat. Please revise it.",
       true
     );
     return;
   }
 
-  approvedMessage = message;
+  approvedMessage = { text, sender, topic };
 
-  const harshPattern =
+  const harsh =
     /\b(you always|you never|idiot|stupid|hate you)\b/i;
 
-  if (harshPattern.test(message)) {
+  if (harsh.test(text)) {
     addNotice(
-      "Consider explaining how you feel without " +
-      "making a personal accusation."
+      "This message may sound accusatory. " +
+      "You can express your feelings while " +
+      "still being clear about your boundaries."
     );
 
-    addButton("Try a gentler version", () => {
-      document.getElementById("message").value =
-        "I feel upset about what happened. " +
-        "I'd like us to talk about it and find " +
-        "a way forward together.";
+    addReviewButton(
+      "Try a gentler version",
+      () => {
+        document.getElementById("message").value =
+          "I feel upset about what happened. " +
+          "I would like us to discuss this " +
+          "respectfully and find a way forward.";
+        clearReview();
+      },
+      "secondary"
+    );
 
-      clearReview();
-    }, true);
-
-    addButton("Keep my original message", () => {
-      sendMessage(approvedMessage);
-    });
+    addReviewButton(
+      "Keep My Original",
+      () => saveMessage()
+    );
   } else {
     addNotice(
       "Your message is ready for final review."
     );
 
-    addButton("Save Practice Message", () => {
-      sendMessage(approvedMessage);
-    });
+    addReviewButton(
+      "Save Practice Message",
+      () => saveMessage()
+    );
   }
 }
 
-function sendMessage(message) {
-  if (!message) return;
+function saveMessage() {
+  if (!approvedMessage) return;
 
-  const space = getActiveSpace();
+  const currentText = document.getElementById("message")
+    .value.trim();
+
+  const currentSender = document.getElementById("senderName")
+    .value.trim() || "You";
+
+  const currentTopic = document.getElementById("topic")
+    .value;
+
+  if (
+    currentText !== approvedMessage.text ||
+    currentSender !== approvedMessage.sender ||
+    currentTopic !== approvedMessage.topic
+  ) {
+    clearReview();
+    return;
+  }
+
+  const space = spaces.find(s => s.id === activeId);
   if (!space) return;
+
+  const message = {
+    ...approvedMessage,
+    time: new Date().toISOString()
+  };
 
   space.messages.push(message);
 
-  if (!saveSpaces()) {
+  if (!persist()) {
     space.messages.pop();
     return;
   }
 
   document.getElementById("message").value = "";
-
   clearReview();
-  renderMessages();
+  renderChat();
 }
 
 loadSpaces();
