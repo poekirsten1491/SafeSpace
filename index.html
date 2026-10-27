@@ -415,6 +415,23 @@ footer {
 <script>
 "use strict";
 
+function openHomeVault() {
+  if (spaces.length === 0) {
+    alert("Create a SafeSpace first.");
+    showScreen("spaces");
+    return;
+  }
+
+  if (spaces.length === 1) {
+    activeId = spaces[0].id;
+    openVault();
+    return;
+  }
+
+  alert("Choose which SafeSpace's Vault to open.");
+  showScreen("spaces");
+}
+
 const STORAGE_KEY = "safespace-v4-demo";
 const V3_KEY = "safespace_v3";
 
