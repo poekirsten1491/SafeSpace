@@ -6,14 +6,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#527765">
 <title>SafeSpace</title>
+
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   background: #edf2ec;
   color: #304b3e;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Arial, sans-serif;
 }
 
 header {
@@ -23,8 +27,15 @@ header {
   padding: 30px 16px;
 }
 
-header h1 { margin: 0; font-size: 36px; }
-header p { margin: 8px 0 0; font-size: 14px; }
+header h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+header p {
+  margin: 8px 0 0;
+  font-size: 14px;
+}
 
 nav {
   display: flex;
@@ -48,7 +59,9 @@ main {
   box-shadow: 0 3px 12px #294c4010;
 }
 
-h2 { margin-top: 0; }
+h2 {
+  margin-top: 0;
+}
 
 button {
   background: #527765;
@@ -66,7 +79,9 @@ button.secondary {
   color: #304b3e;
 }
 
-button.danger { background: #a34c48; }
+button.danger {
+  background: #a34c48;
+}
 
 button:focus-visible,
 input:focus-visible,
@@ -76,7 +91,9 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   padding: 12px;
   margin: 8px 0 15px;
@@ -100,8 +117,13 @@ label {
   color: #607667;
 }
 
-.screen { display: none; }
-.screen.active { display: block; }
+.screen {
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
 
 .space-card {
   background: #f7faf6;
@@ -111,7 +133,9 @@ label {
   margin: 12px 0;
 }
 
-.space-card h3 { margin: 0 0 6px; }
+.space-card h3 {
+  margin: 0 0 6px;
+}
 
 .chat {
   min-height: 220px;
@@ -171,7 +195,6 @@ footer {
   text-align: center;
   padding: 20px;
 }
-
 </style>
 </head>
 
@@ -182,14 +205,17 @@ footer {
   <p>Speak freely. Listen kindly. Grow together.</p>
 </header>
 
-<nav>
+<nav aria-label="Main navigation">
   <button onclick="showScreen('home')">Home</button>
-  <button onclick="showScreen('spaces')">My SafeSpaces</button>
+  <button onclick="showScreen('spaces')">
+    My SafeSpaces
+  </button>
 </nav>
 
 <main>
 
 <section id="home" class="screen active">
+
   <div class="card">
     <h2>Welcome to SafeSpace</h2>
     <p>
@@ -203,14 +229,23 @@ footer {
 
   <div class="card">
     <h2>How are you feeling today?</h2>
-    <button onclick="feeling('Happy')">😊 Happy</button>
-    <button onclick="feeling('Hurt')">💔 Hurt</button>
+
+    <button onclick="feeling('Happy')">
+      😊 Happy
+    </button>
+
+    <button onclick="feeling('Hurt')">
+      💔 Hurt
+    </button>
+
     <button onclick="feeling('Frustrated')">
       😔 Frustrated
     </button>
+
     <button onclick="feeling('Hopeful')">
       🌿 Hopeful
     </button>
+
     <p id="feelingResult" aria-live="polite"></p>
   </div>
 
@@ -222,28 +257,46 @@ footer {
     <p>✓ Respect personal boundaries</p>
     <p>✓ Choose understanding over insults</p>
   </div>
+
 </section>
 
 <section id="spaces" class="screen">
+
   <div class="card">
     <h2>My SafeSpaces</h2>
-    <p>Create and organize your practice conversations.</p>
+    <p>
+      Create and organize your practice
+      conversations.
+    </p>
+
     <div id="spacesList"></div>
+
     <button onclick="showScreen('create')">
       + Create a SafeSpace
     </button>
   </div>
+
 </section>
 
 <section id="create" class="screen">
+
   <div class="card">
     <h2>Create a SafeSpace</h2>
 
-    <label for="spaceName">SafeSpace Name</label>
-    <input id="spaceName" maxlength="60"
-      placeholder="Our Family Space">
+    <label for="spaceName">
+      SafeSpace Name
+    </label>
 
-    <label for="spaceType">Space Type</label>
+    <input
+      id="spaceName"
+      maxlength="60"
+      placeholder="Our Family Space"
+    >
+
+    <label for="spaceType">
+      Space Type
+    </label>
+
     <select id="spaceType">
       <option>Family</option>
       <option>Co-Parenting</option>
@@ -255,37 +308,58 @@ footer {
     <button onclick="createSpace()">
       Create SafeSpace
     </button>
-    <button class="secondary"
+
+    <button
+      class="secondary"
       onclick="showScreen('spaces')">
       Cancel
     </button>
+
     <p id="createStatus" role="status"></p>
   </div>
+
 </section>
 
 <section id="conversation" class="screen">
+
   <div class="card">
-    <button class="secondary"
+
+    <button
+      class="secondary"
       onclick="showScreen('spaces')">
-      ← Back
+      ← Back to My SafeSpaces
     </button>
 
     <h2 id="conversationTitle"></h2>
+
     <p id="conversationType" class="small"></p>
 
     <p class="small">
-      Local practice only. Messages are not sent
-      to anyone. Use fictional information.
+      Local practice only. Messages are not
+      sent to anyone. Use fictional information.
     </p>
 
-    <div id="chat" class="chat"
-      role="log" aria-label="Practice messages"></div>
+    <div
+      id="chat"
+      class="chat"
+      role="log"
+      aria-label="Practice messages">
+    </div>
 
-    <label for="senderName">Display Name</label>
-    <input id="senderName" maxlength="40"
-      placeholder="Example: Parent A">
+    <label for="senderName">
+      Display Name
+    </label>
 
-    <label for="topic">Conversation Topic</label>
+    <input
+      id="senderName"
+      maxlength="40"
+      placeholder="Example: Parent A"
+    >
+
+    <label for="topic">
+      Conversation Topic
+    </label>
+
     <select id="topic">
       <option>General</option>
       <option>Parenting</option>
@@ -296,8 +370,12 @@ footer {
       <option>Other</option>
     </select>
 
-    <label for="message">Your Message</label>
-    <textarea id="message"
+    <label for="message">
+      Your Message
+    </label>
+
+    <textarea
+      id="message"
       placeholder="I feel..."></textarea>
 
     <button onclick="reviewMessage()">
@@ -305,7 +383,9 @@ footer {
     </button>
 
     <div id="review" aria-live="polite"></div>
+
   </div>
+
 </section>
 
 </main>
@@ -321,8 +401,8 @@ footer {
 <script>
 "use strict";
 
-const STORAGE_KEY = "safespace-v3-demo";
-const OTHER_V3_KEY = "safespace_v3";
+const STORAGE_KEY = "safespace-v4-demo";
+const V3_KEY = "safespace_v3";
 
 let spaces = [];
 let activeId = null;
@@ -362,12 +442,14 @@ function loadSpaces() {
     let raw = localStorage.getItem(STORAGE_KEY);
 
     if (raw === null) {
-      raw = localStorage.getItem(OTHER_V3_KEY);
+      raw = localStorage.getItem(V3_KEY);
     }
 
     const saved = JSON.parse(raw || "[]");
 
-    if (!Array.isArray(saved)) return;
+    if (!Array.isArray(saved)) {
+      throw new Error("Invalid saved data");
+    }
 
     spaces = saved
       .filter(s =>
@@ -384,8 +466,12 @@ function loadSpaces() {
           .map(normalizeMessage)
           .filter(Boolean)
       }));
+
   } catch (error) {
-    alert("Saved practice data could not be loaded.");
+    alert(
+      "Saved practice data could not be loaded. " +
+      "Your original browser data has not been deleted."
+    );
   }
 }
 
@@ -397,7 +483,9 @@ function persist() {
     );
     return true;
   } catch (error) {
-    alert("Your browser could not save this change.");
+    alert(
+      "Your browser could not save this change."
+    );
     return false;
   }
 }
@@ -411,7 +499,9 @@ function showScreen(id) {
       );
     });
 
-  if (id === "spaces") renderSpaces();
+  if (id === "spaces") {
+    renderSpaces();
+  }
 }
 
 function feeling(value) {
@@ -423,10 +513,13 @@ function feeling(value) {
 
 function makeButton(label, callback, css = "") {
   const button = document.createElement("button");
+
   button.textContent = label;
   button.className = css;
   button.type = "button";
+
   button.addEventListener("click", callback);
+
   return button;
 }
 
@@ -445,8 +538,8 @@ function createSpace() {
 
   const space = {
     id: crypto.randomUUID(),
-    name,
-    category,
+    name: name,
+    category: category,
     messages: []
   };
 
@@ -458,6 +551,7 @@ function createSpace() {
   }
 
   document.getElementById("spaceName").value = "";
+
   document.getElementById("createStatus")
     .textContent = "";
 
@@ -466,13 +560,16 @@ function createSpace() {
 
 function renderSpaces() {
   const list = document.getElementById("spacesList");
+
   list.replaceChildren();
 
   if (!spaces.length) {
     const empty = document.createElement("p");
+
     empty.className = "small";
     empty.textContent =
       "No SafeSpaces yet. Create your first one.";
+
     list.appendChild(empty);
     return;
   }
@@ -486,6 +583,7 @@ function renderSpaces() {
 
     const detail = document.createElement("p");
     detail.className = "small";
+
     detail.textContent =
       space.category + " • " +
       space.messages.length + " messages";
@@ -493,9 +591,15 @@ function renderSpaces() {
     card.append(
       title,
       detail,
-      makeButton("Open", () => openSpace(space.id)),
-      makeButton("Delete",
-        () => deleteSpace(space.id), "danger")
+      makeButton(
+        "Open",
+        () => openSpace(space.id)
+      ),
+      makeButton(
+        "Delete",
+        () => deleteSpace(space.id),
+        "danger"
+      )
     );
 
     list.appendChild(card);
@@ -504,14 +608,18 @@ function renderSpaces() {
 
 function deleteSpace(id) {
   const space = spaces.find(s => s.id === id);
+
   if (!space) return;
 
-  if (!confirm(
+  const confirmed = confirm(
     'Delete "' + space.name +
     '" and its practice messages?'
-  )) return;
+  );
+
+  if (!confirmed) return;
 
   const previous = spaces;
+
   spaces = spaces.filter(s => s.id !== id);
 
   if (!persist()) {
@@ -519,11 +627,16 @@ function deleteSpace(id) {
     return;
   }
 
+  if (activeId === id) {
+    activeId = null;
+  }
+
   renderSpaces();
 }
 
 function openSpace(id) {
   const space = spaces.find(s => s.id === id);
+
   if (!space) return;
 
   activeId = id;
@@ -535,6 +648,7 @@ function openSpace(id) {
     .textContent = space.category;
 
   document.getElementById("message").value = "";
+
   clearReview();
   renderChat();
   showScreen("conversation");
@@ -542,16 +656,20 @@ function openSpace(id) {
 
 function renderChat() {
   const chat = document.getElementById("chat");
+
   chat.replaceChildren();
 
   const space = spaces.find(s => s.id === activeId);
+
   if (!space) return;
 
   if (!space.messages.length) {
     const empty = document.createElement("p");
+
     empty.className = "small";
     empty.textContent =
       "Start your practice conversation.";
+
     chat.appendChild(empty);
   }
 
@@ -574,6 +692,7 @@ function renderChat() {
 
     if (message.time) {
       const date = new Date(message.time);
+
       if (!Number.isNaN(date.getTime())) {
         dateLabel = date.toLocaleString();
       }
@@ -591,7 +710,9 @@ function renderChat() {
 
 function clearReview() {
   approvedMessage = null;
-  document.getElementById("review").replaceChildren();
+
+  document.getElementById("review")
+    .replaceChildren();
 }
 
 document.getElementById("message")
@@ -605,8 +726,11 @@ document.getElementById("topic")
 
 function addNotice(text, warning = false) {
   const notice = document.createElement("div");
+
   notice.className = warning
-    ? "notice warning" : "notice";
+    ? "notice warning"
+    : "notice";
+
   notice.textContent = text;
 
   document.getElementById("review")
@@ -615,7 +739,9 @@ function addNotice(text, warning = false) {
 
 function addReviewButton(label, callback, css = "") {
   document.getElementById("review")
-    .appendChild(makeButton(label, callback, css));
+    .appendChild(
+      makeButton(label, callback, css)
+    );
 }
 
 function reviewMessage() {
@@ -647,7 +773,11 @@ function reviewMessage() {
     return;
   }
 
-  approvedMessage = { text, sender, topic };
+  approvedMessage = {
+    text: text,
+    sender: sender,
+    topic: topic
+  };
 
   const harsh =
     /\b(you always|you never|idiot|stupid|hate you)\b/i;
@@ -666,6 +796,7 @@ function reviewMessage() {
           "I feel upset about what happened. " +
           "I would like us to discuss this " +
           "respectfully and find a way forward.";
+
         clearReview();
       },
       "secondary"
@@ -675,6 +806,7 @@ function reviewMessage() {
       "Keep My Original",
       () => saveMessage()
     );
+
   } else {
     addNotice(
       "Your message is ready for final review."
@@ -709,6 +841,7 @@ function saveMessage() {
   }
 
   const space = spaces.find(s => s.id === activeId);
+
   if (!space) return;
 
   const message = {
@@ -724,6 +857,7 @@ function saveMessage() {
   }
 
   document.getElementById("message").value = "";
+
   clearReview();
   renderChat();
 }
