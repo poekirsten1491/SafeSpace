@@ -7,6 +7,30 @@
 <meta name="theme-color" content="#527765">
 <title>SafeSpace</title>
 
+.home-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.home-buttons button {
+  min-height: 95px;
+  margin: 0;
+  background: #e3ede5;
+  color: #304b3e;
+  font-weight: 600;
+  border: 1px solid #b9cbbd;
+}
+
+.home-buttons button:last-child {
+  grid-column: 1 / -1;
+}
+
+.home-buttons button:hover {
+  background: #d4e5d7;
+}
+
 <style>
 * {
   box-sizing: border-box;
